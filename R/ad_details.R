@@ -32,7 +32,7 @@ tiktokcomm_get_ad_details <- function(ad_id,
                                                  "ad.status_statement", "ad.videos", "ad.image_urls", "ad.reach",
                                                  "advertiser.business_id", "advertiser.business_name", "advertiser.paid_for_by",
                                                  "advertiser.follower_count", "advertiser.avatar_url", "advertiser.profile_url",
-                                                 "ad_group.targeting_info"),
+                                                 "ad_group.targeting_info", "ad.rejection_info"),
                                       verbose = FALSE) {
 
   if (is.null(ad_id) || !is.numeric(ad_id)) {
@@ -82,9 +82,13 @@ tiktokcomm_get_ad_details <- function(ad_id,
     image_urls = list(content$data$ad$image_urls),
     videos = list(content$data$ad$videos),
     reach = list(content$data$ad$reach),
+    rejection_info = list(content$data$ad$rejection_info),
     business_id = content$data$advertiser$business_id,
     business_name = content$data$advertiser$business_name,
     paid_for_by = content$data$advertiser$paid_for_by,
+    avatar_url = content$data$advertiser$tiktok_account$avatar_url,
+    follower_count = content$data$advertiser$tiktok_account$follower_count,
+    profile_url = content$data$advertiser$tiktok_account$profile_url,
     targeting_info = list(content$data$ad_group$targeting_info)
   )
 

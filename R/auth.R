@@ -15,26 +15,32 @@
 #' \dontrun{
 #' tiktokcomm_auth()
 #' }
-tiktokcomm_auth <- function(force = FALSE, verbose = FALSE) {
+tiktokcomm_auth <- function(force = FALSE, verbose = FALSE, keep_client_data = F) {
   # Check for existing credentials
   existing_key <- Sys.getenv("TIKTOK_COMM_CLIENT_KEY")
   existing_secret <- Sys.getenv("TIKTOK_COMM_CLIENT_SECRET")
   existing_token <- Sys.getenv("TIKTOK_COMM_TOKEN")
 
-  if (!force && (existing_key != "" || existing_secret != "" || existing_token != "")) {
-    overwrite <- usethis::ui_yeah(
-      "Existing TikTok Commercial API credentials found. Overwrite?",
-      no = "Keeping existing credentials"
-    )
-    if (!overwrite) {
-      return(invisible(FALSE))
+  if(!force){
+    if (!force && (existing_key != "" || existing_secret != "" || existing_token != "")) {
+      overwrite <- usethis::ui_yeah(
+        "Existing TikTok Commercial API credentials found. Overwrite?",
+        no = "Keeping existing credentials"
+      )
+      if (!overwrite) {
+        return(invisible(FALSE))
+      }
     }
-  }
 
-  # Prompt for client key and secret
-  if (verbose) usethis::ui_info("Please enter your TikTok Commercial API credentials.")
-  client_key <- readline(usethis::ui_field("Client Key: "))
-  client_secret <- readline(usethis::ui_field("Client Secret: "))
+    # Prompt for client key and secret
+    if (verbose) usethis::ui_info("Please enter your TikTok Commercial API credentials.")
+    client_key <- readline(usethis::ui_field("Client Key: "))
+    client_secret <- readline(usethis::ui_field("Client Secret: "))
+
+  } else {
+    client_key <- Sys.getenv("TIKTOK_COMM_CLIENT_KEY")
+    client_secret <- Sys.getenv("TIKTOK_COMM_CLIENT_SECRET")
+  }
 
   # Authenticate with the API
   url <- "https://open.tiktokapis.com/v2/oauth/token/"

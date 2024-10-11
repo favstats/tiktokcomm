@@ -16,7 +16,8 @@
 #' @param max_pages Maximum number of pages to retrieve. Default is Inf (all pages).
 #' @param include_details Logical. If TRUE, fetches detailed information for each ad. Default is FALSE.
 #' @param verbose Logical. If TRUE, provides detailed output. Default is FALSE.
-#'
+#' @param safe Logical. If TRUE, provides detailed output. Default is FALSE.
+
 #' @return A tibble containing all retrieved ads.
 #' @export
 #'
@@ -52,7 +53,8 @@ tiktokcomm_query_ads <- function(fields = c("ad.id", "ad.first_shown_date", "ad.
                                  max_count = 10,
                                  max_pages = Inf,
                                  include_details = FALSE,
-                                 verbose = FALSE) {
+                                 verbose = FALSE,
+                                 safe = F) {
 
   token <- tiktokcomm_get_token(verbose = verbose)
   if (is.null(token)) {
@@ -116,7 +118,12 @@ tiktokcomm_query_ads <- function(fields = c("ad.id", "ad.first_shown_date", "ad.
 
     if (httr::status_code(response) != 200) {
       usethis::ui_oops("Query failed: {httr::content(response)$error$message}")
+      if(!safe){
       stop(glue::glue("Status code: {httr::status_code(response)}"))
+      } else {
+        break
+      }
+
     }
 
     content <- httr::content(response, "parsed", encoding = "UTF-8")

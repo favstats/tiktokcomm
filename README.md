@@ -34,8 +34,10 @@ library(tiktokcomm)
 ## Authentication
 
 Before using any of the functions, you need to authenticate with the
-TikTok Commercial API. Use the tiktokcomm_auth() function to set up your
-credentials:
+TikTok Commercial API. Please [first apply for
+access](https://developers.tiktok.com/products/commercial-content-api)
+and get your client key and secret. Use the tiktokcomm_auth() function
+to set up your credentials:
 
 ``` r
 
@@ -88,7 +90,7 @@ tiktokcomm_query_ads(
   include_details = T,
   verbose = F
 )
-#> # A tibble: 5 × 24
+#> # A tibble: 5 × 25
 #>        id first_shown_date last_shown_date status image_urls videos     reach   
 #>     <dbl> <date>           <date>          <chr>  <list>     <list>     <chr>   
 #> 1 1.79e15 2024-01-08       2024-01-09      active <NULL>     <list [1]> 10K-100K
@@ -96,13 +98,13 @@ tiktokcomm_query_ads(
 #> 3 1.79e15 2024-01-12       2024-01-14      active <NULL>     <list [1]> 10K-100K
 #> 4 1.79e15 2024-02-02       2024-02-03      active <NULL>     <list [1]> 1K-10K  
 #> 5 1.79e15 2024-02-11       2024-02-13      active <NULL>     <list [1]> 1K-10K  
-#> # ℹ 17 more variables: advertiser_business_id <dbl>,
+#> # ℹ 18 more variables: advertiser_business_id <dbl>,
 #> #   advertiser_business_name <chr>, advertiser_paid_for_by <chr>,
 #> #   status_statement <chr>, reach_unique_users_seen <chr>,
-#> #   reach_unique_users_seen_by_country <list>, business_id <dbl>,
-#> #   business_name <chr>, paid_for_by <chr>, targeting_info_age <list>,
-#> #   targeting_info_audience_targeting <chr>, targeting_info_country <list>,
-#> #   targeting_info_creator_interactions <chr>, targeting_info_gender <list>, …
+#> #   reach_unique_users_seen_by_country <list>, rejection_info <list>,
+#> #   business_id <dbl>, business_name <chr>, paid_for_by <chr>,
+#> #   targeting_info_country <list>, targeting_info_creator_interactions <chr>,
+#> #   targeting_info_gender <list>, targeting_info_interest <chr>, …
 ```
 
 ## Query Advertisers
@@ -117,9 +119,9 @@ tiktokcomm_query_advertisers(
 #>    business_id business_name     country_code
 #>          <dbl> <chr>             <chr>       
 #>  1     7.26e18 Awesome Cosmetics PL          
-#>  2     7.41e18 AWESOME           TH          
-#>  3     7.41e18 SJAJSF            US          
-#>  4     7.17e18 Adidog            IE          
+#>  2     7.42e18 KAKAKA            US          
+#>  3     7.17e18 Adidog            IE          
+#>  4     7.41e18 SJAJSF            US          
 #>  5     7.41e18 OYIB              ID          
 #>  6     7.41e18 OYIB              ID          
 #>  7     7.41e18 OYIB              ID          
@@ -139,17 +141,17 @@ tiktokcomm_get_ad_details(
   ad_id = 1812268576617521,
   verbose = F
 )
-#> # A tibble: 1 × 20
+#> # A tibble: 1 × 21
 #>        id first_shown_date last_shown_date status status_statement image_urls
 #>     <dbl> <date>           <date>          <chr>  <chr>            <list>    
-#> 1 1.81e15 2024-10-09       2024-10-09      active N/A              <list [1]>
-#> # ℹ 14 more variables: videos <list>, reach_unique_users_seen <chr>,
-#> #   reach_unique_users_seen_by_country <list>, business_id <dbl>,
-#> #   business_name <chr>, paid_for_by <chr>, targeting_info_interest <chr>,
+#> 1 1.81e15 2024-10-09       2024-10-10      active N/A              <list [1]>
+#> # ℹ 15 more variables: videos <list>, reach_unique_users_seen <chr>,
+#> #   reach_unique_users_seen_by_country <list>, rejection_info <list>,
+#> #   business_id <dbl>, business_name <chr>, paid_for_by <chr>,
+#> #   targeting_info_country <list>, targeting_info_creator_interactions <chr>,
+#> #   targeting_info_gender <list>, targeting_info_interest <chr>,
 #> #   targeting_info_number_of_users_targeted <chr>,
-#> #   targeting_info_video_interactions <chr>, targeting_info_age <list>,
-#> #   targeting_info_audience_targeting <chr>, targeting_info_country <list>,
-#> #   targeting_info_creator_interactions <chr>, targeting_info_gender <list>
+#> #   targeting_info_video_interactions <chr>, targeting_info_age <list>, …
 ```
 
 This function retrieves detailed information about a specific TikTok ad.

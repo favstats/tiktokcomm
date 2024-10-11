@@ -41,7 +41,7 @@ library(tiktokcomm)
 
 ## Authentication
 
-Before using any of the functions, you need to authenticate with the TikTok Commercial API. Use the tiktokcomm_auth() function to set up your credentials:
+Before using any of the functions, you need to authenticate with the TikTok Commercial API. Please [first apply for access](https://developers.tiktok.com/products/commercial-content-api) and get your client key and secret.  Use the tiktokcomm_auth() function to set up your credentials:
 
 
 
